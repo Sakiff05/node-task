@@ -42,7 +42,7 @@ export default function HomePage() {
   }, [setData]);
 
   return (
-    <div className="d-flex align-items-center flex-column gap-5">
+    <div className="d-flex align-items-center flex-column gap-5 container">
       <Button
         variant="danger"
         onClick={() => navigate(`/add`)}
