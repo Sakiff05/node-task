@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import Button from 'react-bootstrap/Button';
+import Swal from "sweetalert2";
+import Button from "react-bootstrap/Button";
 
 export default function HomePage() {
   const [data, setData] = useState([]);
@@ -14,9 +15,26 @@ export default function HomePage() {
   }
 
   function handleDelete(id) {
-    axios
-      .delete(`http://localhost:3000/cars/${id}`)
-      .then(() => setData([...data].filter((car) => car._id != id)));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:3000/cars/${id}`)
+          .then(() => setData([...data].filter((car) => car._id != id)));
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
   }
 
   useEffect(() => {
