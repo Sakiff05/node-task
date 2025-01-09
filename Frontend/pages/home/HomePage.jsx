@@ -42,7 +42,14 @@ export default function HomePage() {
   }, [setData]);
 
   return (
-    <>
+    <div className="d-flex align-items-center flex-column gap-5">
+      <Button
+        variant="danger"
+        onClick={() => navigate(`/add`)}
+        className="mt-5 w-25 "
+      >
+        ADD
+      </Button>
       <table>
         <tr>
           <th>Brand</th>
@@ -77,6 +84,6 @@ export default function HomePage() {
           </tr>
         ))}
       </table>
-    </>
+    </div>
   );
 }
